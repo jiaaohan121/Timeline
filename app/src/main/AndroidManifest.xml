@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.administrator.timeline">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".TimeLine"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".TimerView"
+            android:label="@string/title_activity_timer"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DaysMatter"
+            android:label="@string/title_activity_days_matter"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AddTask"
+            android:label="@string/title_activity_add_task"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Report"
+            android:label="@string/title_activity_report"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Adding"
+            android:label="@string/title_activity_adding"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Classification"
+            android:label="@string/title_activity_classification"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+    </application>
+
+</manifest>
