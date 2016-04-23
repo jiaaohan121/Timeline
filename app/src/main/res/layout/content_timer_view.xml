@@ -9,90 +9,123 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
+    android:background="#66CCFF"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".TimerView"
     tools:showIn="@layout/activity_timer_view">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText
-            android:layout_width="77dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:inputType="time"
-            android:ems="10"
-            android:id="@+id/etHour" />
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="18dp"
-            android:layout_height="wrap_content"
-            android:text=":"
-            android:id="@+id/textView" />
 
-        <EditText
-            android:layout_width="74dp"
+    <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/add"
+            android:background="@drawable/add"
+            android:layout_gravity="right|top"
+
+            />
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/report"
+        android:background="@drawable/report"
+        android:layout_gravity="left|bottom"
+
+
+        />
+</FrameLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="248dp"
+            android:layout_gravity="center_horizontal">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="171dp"
+                    android:layout_height="wrap_content">
+
+
+                    <EditText
+                        android:layout_width="90dp"
+                        android:layout_height="153dp"
+                        android:layout_weight="1"
+                        android:inputType="time"
+                        android:ems="10"
+                        android:textSize="50sp"
+                        android:id="@+id/etMin"
+                        android:background="@null"/>
+                    <TextView
+                        android:layout_width="18dp"
+                        android:layout_height="wrap_content"
+                        android:text=":"
+                        android:id="@+id/textView2" />
+                    <EditText
+                        android:layout_width="74dp"
+                        android:layout_height="153dp"
+                        android:layout_weight="1"
+                        android:inputType="time"
+                        android:ems="50"
+                        android:textSize="50sp"
+                        android:id="@+id/etSec"
+                        android:background="@null"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:inputType="time"
-            android:ems="10"
-            android:id="@+id/etMin" />
-        <TextView
-            android:layout_width="18dp"
-            android:layout_height="wrap_content"
-            android:text=":"
-            android:id="@+id/textView2" />
-        <EditText
-            android:layout_width="74dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:inputType="time"
-            android:ems="10"
-            android:id="@+id/etSec" />
+            android:layout_weight="0.62">
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Start"
+                android:id="@+id/btnStart"
+                android:background="@null"
+                android:drawableLeft="@drawable/btn_selector_start"
+                android:layout_gravity="center_horizontal|top" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Resume"
+                android:id="@+id/btnResume"
+                android:background="@null"
+                android:drawableLeft="@drawable/btn_selector_start"
+
+                android:layout_gravity="center_horizontal|top" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Pause"
+                android:id="@+id/btnPause"
+                android:background="@null"
+                android:drawableLeft="@drawable/btn_selector_pause"
+
+                android:layout_gravity="center_horizontal|top" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Reset"
+                android:id="@+id/btnReset"
+                android:background="@null"
+                android:drawableLeft="@drawable/btn_selector_reset"
+
+                android:layout_gravity="center" />
+
+
+        </FrameLayout>
+
+
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
-
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Start"
-            android:id="@+id/btnStart"
-            android:drawableLeft="@drawable/start"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Pause"
-            android:id="@+id/btnPause"
-            android:drawableLeft="@drawable/pause"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Reset"
-            android:id="@+id/btnReset"
-            android:drawableLeft="@drawable/a"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Resume"
-            android:id="@+id/btnResume"
-            android:drawableLeft="@drawable/start"/>
-    </LinearLayout>
-
-
-</LinearLayout>
-

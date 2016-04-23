@@ -1,6 +1,7 @@
 package com.example.administrator.timeline;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -25,31 +26,44 @@ public class TimerView extends AppCompatActivity {
 
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer_view);
+        findViewById(R.id.add).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(TimerView.this, AddTask.class));
+            }
+        });
+        findViewById(R.id.report).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(TimerView.this, Report.class));
+            }
+        });
         btnPause = (Button) findViewById(R.id.btnPause);
         btnPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 stopTimer();
                 btnPause.setVisibility(View.GONE);
-                btnResume.setVisibility(View.VISIBLE);
+                btnResume.setVisibility(View.VISIBLE);//when clicking Pause,the button pause will disappear and resume button will appear.
             }
         });
         btnReset = (Button) findViewById(R.id.btnReset);
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stopTimer();
-                etHour.setText("0");
+                stopTimer();//it is a method to stop timer constructed later
+
                 etMin.setText("0");
-                etSec.setText("0");
+                etSec.setText("0");//when you click reset button, all the text will become 0.
 
                 btnReset.setVisibility(View.GONE);
                 btnResume.setVisibility(View.GONE);
                 btnPause.setVisibility(View.GONE);
-                btnStart.setVisibility(View.VISIBLE);
+                btnStart.setVisibility(View.VISIBLE);//and reset, resume, pause button will disappear, the Start button will appear.you can record again.
             }
         });
         btnResume = (Button) findViewById(R.id.btnResume);
@@ -58,7 +72,8 @@ public class TimerView extends AppCompatActivity {
             public void onClick(View v) {
                 startTimer();
                 btnResume.setVisibility(View.GONE);
-                btnPause.setVisibility(View.VISIBLE);
+                btnPause.setVisibility(View.VISIBLE);//when clicking Resume button, the resume button will
+                // disappear and the pause button will be visible.The function is that you can continue to record time.
             }
         });
         btnStart = (Button) findViewById(R.id.btnStart);
@@ -66,40 +81,18 @@ public class TimerView extends AppCompatActivity {
             @Override
 
             public void onClick(View v) {
-                startTimer();
+                startTimer();// it is the method to start timer constructed later.
                 btnStart.setVisibility(View.GONE);
                 btnPause.setVisibility(View.VISIBLE);
-                btnReset.setVisibility(View.VISIBLE);
+                btnReset.setVisibility(View.VISIBLE);//when you click start button,pause button and reset button will be visible
+                //and start button will disappear.
             }
         });
-        etHour = (EditText) findViewById(R.id.etHour);
+
         etMin = (EditText) findViewById(R.id.etMin);
         etSec = (EditText) findViewById(R.id.etSec);
-        etHour.setText("00");
-        etHour.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        // at the beginning all the editText will be 00
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!TextUtils.isEmpty(s)) {
-                    int value = Integer.parseInt(s.toString());
-                    if (Integer.parseInt(s.toString()) > 59) {
-                        etHour.setText("59");
-                    } else if (value < 0) {
-                        etHour.setText("0");
-                    }
-                }
-                checkToEnableBtnStart();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
         etMin.setText("00");
         etMin.addTextChangedListener(new TextWatcher() {
             @Override
@@ -112,9 +105,7 @@ public class TimerView extends AppCompatActivity {
                 if (!TextUtils.isEmpty(s)) {
                     int value = Integer.parseInt(s.toString());
 
-                    if (Integer.parseInt(s.toString()) > 59) {
-                        etMin.setText("59");
-                    } else if (value < 0) {
+                    if (value < 0) {
                         etMin.setText("0");
                     }
                 }
@@ -145,6 +136,7 @@ public class TimerView extends AppCompatActivity {
                 }
                 checkToEnableBtnStart();
             }
+
             @Override
             public void afterTextChanged(Editable s) {
 
@@ -154,29 +146,27 @@ public class TimerView extends AppCompatActivity {
         btnStart.setEnabled(false);
         btnPause.setVisibility(View.GONE);
         btnResume.setVisibility(View.GONE);
-        btnReset.setVisibility(View.GONE);
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        btnReset.setVisibility(View.GONE);//at the beginning, only start button appears and the other button disappear.
 
     }
 
     private void checkToEnableBtnStart() {
-        btnStart.setEnabled((!TextUtils.isEmpty(etHour.getText()) && Integer.parseInt(etHour.getText().toString()) > 0) ||
-                (!TextUtils.isEmpty(etMin.getText()) && Integer.parseInt(etMin.getText().toString()) > 0) ||
+        btnStart.setEnabled((!TextUtils.isEmpty(etMin.getText()) && Integer.parseInt(etMin.getText().toString()) > 0) ||
                 (!TextUtils.isEmpty(etSec.getText()) && Integer.parseInt(etSec.getText().toString()) > 0));
-    }
+    }//it is a method constructed the environment where start button is enabled
 
     private void startTimer() {
         if (timerTask == null) {
-            alltimerCount = Integer.parseInt(etHour.getText().toString()) * 60 * 60 + Integer.parseInt(etMin.getText().toString()) * 60 + Integer.parseInt(etSec.getText().toString());
+            alltimerCount = Integer.parseInt(etMin.getText().toString()) * 60 + Integer.parseInt(etSec.getText().toString());
+            //timerTask is a method import by java, alltimerCount is to transfer hout and minute to second and compute the sum.
             timerTask = new TimerTask() {
                 @Override
                 public void run() {
                     alltimerCount--;
-                    handler.sendEmptyMessage(MSG_WHAT_TIME_TICK);
+                    handler.sendEmptyMessage(MSG_WHAT_TIME_TICK);//update the hour minute and second, the method can be seen later.
                     if (alltimerCount <= 0) {
-                        handler.sendEmptyMessage(MSG_WHAT_TIME_IS_UP);
-                        stopTimer();
+                        handler.sendEmptyMessage(MSG_WHAT_TIME_IS_UP);//when alltimerCount = 0, the timer appear "timer is up"
+                        stopTimer();//when alltimerCount =0, timer will be stoped
                     }
                 }
             };
@@ -190,7 +180,7 @@ public class TimerView extends AppCompatActivity {
         if (timerTask != null) {
             timerTask.cancel();
             timerTask = null;
-
+//timerTask will be stoped
         }
     }
 
@@ -200,13 +190,13 @@ public class TimerView extends AppCompatActivity {
             super.handleMessage(msg);
             switch (msg.what) {
                 case MSG_WHAT_TIME_TICK:
-                    int hour = alltimerCount / 60 / 60;
-                    int min = (alltimerCount / 60) % 60;
+
+                    int min = alltimerCount / 60;
                     int sec = alltimerCount % 60;
 
-                    etHour.setText(hour + "");
+
                     etMin.setText(min + "");
-                    etSec.setText(sec + "");
+                    etSec.setText(sec + "");//when alltimerCount--, update the hour minute and second
 
                     break;
                 case MSG_WHAT_TIME_IS_UP:
@@ -215,7 +205,7 @@ public class TimerView extends AppCompatActivity {
                     btnResume.setVisibility(View.GONE);
                     btnPause.setVisibility(View.GONE);
                     btnStart.setVisibility(View.VISIBLE);
-                    break;
+                    break;//when time is up start button appear and other buttons disappear.
                 default:
                     break;
             }
@@ -230,5 +220,17 @@ public class TimerView extends AppCompatActivity {
     private EditText etHour, etMin, etSec;
 
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
 
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+
+    }
+}

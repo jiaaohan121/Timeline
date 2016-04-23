@@ -15,13 +15,18 @@ public class TimeLine extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_line);
-        gif = (GifView) findViewById(R.id.gif);
-        gif.setGifImage(R.drawable.gif);
+
 
         findViewById(R.id.daysmatter).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(TimeLine.this, DaysMatter.class));
+            }
+        });
+        findViewById(R.id.user).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(TimeLine.this, Login.class));
             }
         });
         findViewById(R.id.timer).setOnClickListener(new View.OnClickListener() {
